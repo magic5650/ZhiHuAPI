@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">专栏</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="no_nore_zhuanlan">已经列了40个专栏了…</string>
+    <string name="loadData_fail">加载失败</string>
+    <string name="followersCount_text">人关注</string>
+    <string name="postsCount_text">篇文章</string>
+
+    <string name="title_activity_zhuan">ZhuanActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="loading">加载中</string>
+</resources>

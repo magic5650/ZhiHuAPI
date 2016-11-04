@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_marginBottom="1dp"
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:id="@+id/article_pic"
+        android:src="@drawable/article_default_pic"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:id="@+id/article_name"
+        android:text="28.反驳“哭有什么用？又不能解决问题！”| 如何重新认识情绪的价值"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:lineSpacingExtra="2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start"
+        android:id="@+id/article_content"
+        android:text="著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。作者：Simbelmyne链接：http://zhuanlan.zhihu.com"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:lineSpacingExtra="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="16dp"
+                android:text="Steve Shi"
+                android:gravity="center_vertical"
+                android:id="@+id/article_author"
+                android:textColor="?android:attr/textColorSecondaryNoDisable"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="16dp"
+                android:text="七个月前"
+                android:gravity="center_vertical"
+                android:id="@+id/article_create_time"
+                android:textColor="?android:attr/textColorSecondaryNoDisable"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="end|center"
+            android:gravity="end"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="16dp"
+                android:text="60个赞"
+                android:gravity="center_vertical"
+                android:id="@+id/article_likesCount"
+                android:textColor="?android:attr/textColorSecondaryNoDisable"
+                android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="16dp"
+                android:text="9条评论"
+                android:gravity="center_vertical"
+                android:id="@+id/article_commentsCount"
+                android:textColor="?android:attr/textColorSecondaryNoDisable"
+                android:textSize="14sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

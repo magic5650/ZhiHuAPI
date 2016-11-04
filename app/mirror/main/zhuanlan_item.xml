@@ -1,0 +1,22 @@
+<!-- [ Mirror metadata ] generatedAt: 1477985022077 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/zhuanlan_item">
+        <!-- TextView Examples:
+        <zhuanlan_slug text="@string/string_resource" />
+        <zhuanlan_slug text="Text literal" textSize="14sp" /> -->
+        <zhuanlan_slug />
+        <!-- ImageView Examples:
+        <zhuanlan_avatar src="@drawable/image_resource" />
+        <zhuanlan_avatar src="relative_path/image.jpg" /> -->
+        <zhuanlan_avatar />
+        <zhuanlan_name />
+        <zhuanlan_fans_count />
+        <zhuanlan_article_count />
+        <zhuanlan_intro />
+    </_content>
+</screen>
