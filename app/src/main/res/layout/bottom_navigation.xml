@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_main"
+            android:background="@null"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/tab_ic_home_select"
+            android:text="@string/navigation_main"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_middle"/>
+
+        <RadioButton
+            android:id="@+id/tab_love"
+            android:background="@null"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/tab_ic_favorite"
+            android:text="@string/navigation_love"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_middle"/>
+
+        <RadioButton
+            android:id="@+id/tab_recommend"
+            android:background="@null"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/tab_ic_explore"
+            android:text="@string/navigation_recommend"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_middle"/>
+
+        <RadioButton
+            android:id="@+id/tab_personal"
+            android:background="@null"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/tab_ic_person"
+            android:text="@string/navigation_personal"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_middle"/>
+
+    </RadioGroup>
+</LinearLayout>
