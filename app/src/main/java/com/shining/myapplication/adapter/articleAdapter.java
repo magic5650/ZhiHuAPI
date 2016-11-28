@@ -66,7 +66,7 @@ public class articleAdapter extends RecyclerView.Adapter<articleAdapter.articleH
         }
         else {
             String ImageUrl = object.getTitleImage().replace("r.jpg", "b.jpg");
-            Log.d(Constants.TAG,ImageUrl);
+            //Log.d(Constants.TAG,ImageUrl);
             Picasso.with(mContext)
                     .load(ImageUrl)
                     .placeholder(R.drawable.article_default_pic)

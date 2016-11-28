@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <com.shining.myapplication.widget.StickyNavLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:padding="8dp"
+        android:id="@+id/id_stickynavlayout_topview"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/zhuanlan_default_pic"
+            android:id="@+id/zl_avatar_image" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/zl_zhuanlan_name"
+            android:text="知乎周刊"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_big"
+            android:textAllCaps="false"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_vertical"
+            android:id="@+id/zl_zhuanlan_intro"
+            android:text="什么是病毒？病毒是如何运作的？病毒又是怎么影响到我们生活的方方面面的？"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_middle"
+            android:textAlignment="center" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
+            <Button
+                android:text="关注专栏"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:id="@+id/zl_follow_bt"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textSize="@dimen/text_big"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/zl_button_add" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/zl_follow_bt" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/zl_follow_counts"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_small"
+            android:text="1912人关注"
+            android:textAllCaps="false"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <com.zhy.stickynavlayout.view.SimpleViewPagerIndicator
+        android:id="@+id/id_stickynavlayout_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffffff" >
+    </com.zhy.stickynavlayout.view.SimpleViewPagerIndicator>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_stickynavlayout_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </android.support.v4.view.ViewPager>
+
+    </com.shining.myapplication.widget.StickyNavLayout>

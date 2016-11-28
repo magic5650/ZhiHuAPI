@@ -1,8 +1,7 @@
-package com.shining.myapplication.ui;
+package com.shining.myapplication.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shining.myapplication.R;
-import com.shining.myapplication.adapter.EndLessOnScrollListener;
 import com.shining.myapplication.adapter.ItemClickSupport;
 import com.shining.myapplication.adapter.zlAdapter;
 import com.shining.myapplication.api.Constants;
@@ -232,7 +230,7 @@ public class MainActivity extends AppCompatActivity
                 TextView textView = (TextView) v.findViewById(R.id.zhuanlan_slug);
                 Log.d(Constants.TAG,"专题slug为"+ textView.getText());
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this,zhuanlanActivity.class);
+                intent.setClass(MainActivity.this,FirstActivity.class);
                 intent.putExtra("zhuanlanInfo",object);
                 startActivity(intent);
 

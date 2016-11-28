@@ -2,8 +2,10 @@ package com.shining.myapplication.api;
 
 import com.android.annotations.Nullable;
 import com.shining.myapplication.model.article;
+import com.shining.myapplication.model.comment;
 import com.shining.myapplication.model.ids;
 import com.shining.myapplication.model.postArticle;
+import com.shining.myapplication.model.user;
 import com.shining.myapplication.model.zhuanlan;
 import com.shining.myapplication.model.zhuanlan_more;
 
@@ -20,8 +22,8 @@ import rx.Observable;
 
 public interface Services {
     /*
-     * 获取推荐专栏列表,offset初始为零,seed=20或者98或者100,可有可无
-     *
+     * 获取推荐专栏列表,offset初始为零,seed=20或者47,89,90,98或者100,
+     * seed=85为关联
      */
     @GET("api/recommendations/columns")
     Observable<List<zhuanlan>> getReZhuanlanList(
@@ -31,7 +33,8 @@ public interface Services {
     );
 
     /*
-     * 获取推荐文章列表,offset初始为零,seed=20,可有可无
+     * 获取推荐文章列表,offset初始为零,seed=20或者47,89,90,98或者100,
+     * seed=85为关联
      */
     @GET("api/recommendations/posts")
     Observable<List<postArticle>> getRePostList(
@@ -60,12 +63,31 @@ public interface Services {
     );
 
     /*
-     * 获取某个专栏的详细信息,refer可有可无
+     * 获取某个文章的详细信息,refer可有可无
      */
     @GET("api/posts/{articleId}")
     Observable<article> getArticleInfo(
             @Path("articleId") String articleId,
             @Query("refer") String refer
+    );
+
+
+    /*
+     * 获取某个文章的评论信息
+     */
+    @GET("api/posts/{articleId}/comments")
+    Observable<List<comment>> getCommentsList(
+            @Path("articleId") String articleId,
+            @Query("limit") Integer limit
+    );
+
+
+    /*
+     * 获取某个用户的详细信息
+     */
+    @GET("api/columns/{userId}")
+    Observable<user> getUserInfo(
+            @Path("userId") String userId
     );
 
     /*

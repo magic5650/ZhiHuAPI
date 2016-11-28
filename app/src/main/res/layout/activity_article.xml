@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="false"
     android:background="?android:attr/colorBackground"
-    tools:context="com.shining.myapplication.ui.articleActivity">
+    tools:context="com.shining.myapplication.activity.articleActivity">
 
     <!--<android.support.v7.widget.Toolbar
         android:id="@+id/article_toolbar"

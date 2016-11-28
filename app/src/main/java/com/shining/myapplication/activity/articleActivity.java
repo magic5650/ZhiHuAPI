@@ -1,4 +1,4 @@
-package com.shining.myapplication.ui;
+package com.shining.myapplication.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -57,7 +57,7 @@ public class articleActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         mToolbar.setTitle("载入中..");
 /*        mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));*/
-        setSupportActionBar(mToolbar);
+        //setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
@@ -74,7 +74,7 @@ public class articleActivity extends AppCompatActivity {
         //支持JS
         settings.setJavaScriptEnabled(true);
         //支持插件
-        settings.setPluginState(WebSettings.PluginState.ON);
+        //settings.setPluginState(WebSettings.PluginState.ON);
         //设置适应屏幕
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);

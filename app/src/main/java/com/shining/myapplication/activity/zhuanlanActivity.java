@@ -1,10 +1,10 @@
-package com.shining.myapplication.ui;
+package com.shining.myapplication.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,24 +14,22 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shining.myapplication.R;
 import com.shining.myapplication.adapter.CircleTransform;
 import com.shining.myapplication.adapter.ItemClickSupport;
 import com.shining.myapplication.adapter.articleAdapter;
-import com.shining.myapplication.adapter.zlAdapter;
 import com.shining.myapplication.api.Constants;
 import com.shining.myapplication.api.DataAPI;
 import com.shining.myapplication.api.Services;
 import com.shining.myapplication.model.article;
 import com.shining.myapplication.model.zhuanlan;
 import com.shining.myapplication.model.zhuanlan_more;
+import com.shining.myapplication.widget.MyLinearLayoutManager;
 import com.squareup.picasso.Picasso;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +59,11 @@ public class zhuanlanActivity extends AppCompatActivity {
     TextView zlTopicName;
     @BindView(R.id.zl_articles_view)
     RecyclerView zlArticlesView;
-    @BindView(R.id.activity_zhuanlan)
-    ScrollView activityZhuanlan;
+    @BindView(R.id.zl_toolbar)
+    Toolbar toolbar;
+
+/*    @BindView(R.id.activity_zhuanlan)
+    ScrollView activityZhuanlan;*/
 
     private Services service;
     private Context mContext;
@@ -71,7 +72,7 @@ public class zhuanlanActivity extends AppCompatActivity {
     private RecyclerView article_recyclerView;
     private List<article> article_Data;
     private articleAdapter article_Adapter;
-    private LinearLayoutManager layoutManager;
+    private MyLinearLayoutManager layoutManager;
     private String slug;
     private final static Integer defaultNum = 20;
 
@@ -80,6 +81,8 @@ public class zhuanlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhuanlan);
         ButterKnife.bind(this);
+
+
         service = new DataAPI().getService();
         mContext = zhuanlanActivity.this;
 
@@ -88,17 +91,18 @@ public class zhuanlanActivity extends AppCompatActivity {
         if (zhuanlanInfo != null) {
             show_zhuanlan(zhuanlanInfo);
             slug = zhuanlanInfo.getSlug();
+            initToolbar(zhuanlanInfo.getName());
             init_topics(slug);
         }
 
         article_recyclerView = (RecyclerView) findViewById(R.id.zl_articles_view);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new MyLinearLayoutManager(this);
         //设置布局管理器
         article_recyclerView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         article_Data = new ArrayList<article>();
-        article_Adapter= new articleAdapter(zhuanlanActivity.this,article_Data);
+        article_Adapter= new articleAdapter(this,article_Data);
         //设置Adapter
         article_recyclerView.setAdapter(article_Adapter);
         //设置增加或删除条目的动画
@@ -108,6 +112,61 @@ public class zhuanlanActivity extends AppCompatActivity {
             show_articles(slug,defaultNum,null,null);
             OnClick_Jump_To_Article_Activity();
         }
+
+        article_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstVisibleItem = ((LinearLayoutManager) article_recyclerView.getLayoutManager())
+                        .findFirstVisibleItemPosition();
+                Log.d(Constants.TAG,"article_recyclerView onScrolled");
+                if(firstVisibleItem !=0 && dy <-25) {
+                    hideToolbar();
+                }
+
+            }
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                Log.d(Constants.TAG,"article_recyclerView onScrollStateChanged");
+            }
+        });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d(Constants.TAG,"zhuanlanActivity onResume");
+        Log.d(Constants.TAG,"toolbar Height is "+toolbar.getHeight());
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.d(Constants.TAG,"zhuanlanActivity onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.d(Constants.TAG,"zhuanlanActivity onDestroy");
+    }
+
+    private void initToolbar (String name) {
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        toolbar.setTitle("专栏-"+name);
+        setSupportActionBar(toolbar);
+/*        if(getSupportActionBar() != null){
+            // Enable the Up button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }*/
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* NavUtils.navigateUpFromSameTask(zhuanlanActivity.this);*/
+                //finish();
+                onBackPressed();
+            }
+        });
     }
 
     private void init_topics(String slug) {
@@ -149,7 +208,14 @@ public class zhuanlanActivity extends AppCompatActivity {
         Picasso.with(mContext).load(avatarUrl).placeholder(R.drawable.zhuanlan_default_pic)
                 .transform(new CircleTransform()).into(zlAvatarImage);
         zlZhuanlanName.setText(zhuanlanInfo.getName());
-        zlZhuanlanIntro.setText(zhuanlanInfo.getDescription());
+        if ( !zhuanlanInfo.getDescription().equals("") ) {
+            zlZhuanlanIntro.setText(zhuanlanInfo.getDescription());
+        }
+        else{
+            String defaultIntro_text = mContext.getResources().getString(R.string.defaultIntro_text);
+            zlZhuanlanIntro.setText(defaultIntro_text);
+        }
+
         String followersCount_text = mContext.getResources().getString(R.string.followersCount_text);
         zlFollowCounts.setText(zhuanlanInfo.getFollowersCount() + "" + followersCount_text);
     }
@@ -189,6 +255,18 @@ public class zhuanlanActivity extends AppCompatActivity {
         return imageUrl;
     }
 
+    private void showToolbar(){
+        ObjectAnimator animator =ObjectAnimator.ofFloat(toolbar,View.TRANSLATION_Y,-toolbar.getHeight(),0);
+        animator.setDuration(500);
+        animator.start();
+    }
+
+    private void hideToolbar(){
+        ObjectAnimator animator =ObjectAnimator.ofFloat(toolbar,View.TRANSLATION_Y,0,-toolbar.getHeight());
+        animator.setDuration(500);
+        animator.start();
+    }
+
     @OnClick(R.id.zl_follow_bt)
     public void onClick() {
 
@@ -200,12 +278,31 @@ public class zhuanlanActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 // do it
                 article object = article_Data.get(position);
-                Intent intent = new Intent();
+/*                Intent intent = new Intent();
                 Log.d(Constants.TAG,object.getSlug()+"");
                 intent.setClass(zhuanlanActivity.this,articleActivity.class);
                 intent.putExtra("articleSlug",object.getSlug()+"");
-                startActivity(intent);
+                startActivity(intent);*/
+                String url="https://zhuanlan.zhihu.com/p/" + object.getSlug();
+                //编写 javaScript方法
+                //tring javascript = "javascript: var x=document.getElementById(\"header\");x.remove(x.selectedIndex);";
+                String javascript = "javascript: document.getElementsByTagName(\"div\")[0].remove();";
+                Log.d(Constants.TAG,object.getSlug()+"");
+                new FinestWebView.Builder(zhuanlanActivity.this)
+                        .iconDefaultColor(ContextCompat.getColor(mContext, R.color.white))
+                        .showIconBack(true)
+                        .showIconForward(true)
+                        .showUrl(false)
+                        .titleDefault(getString(R.string.webview_default_title))
+                        .titleColor(ContextCompat.getColor(mContext, R.color.white))
+                        .titleSize(zlZhuanlanIntro.getTextSize())
+                        .updateTitleFromHtml(true)
+                        .webViewJavaScriptEnabled (true)
+                        .injectJavaScript(javascript)
+                        .backPressToClose(true)
+                        .show(url);
             }
         });
     }
+
 }
